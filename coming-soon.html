@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dilip Fire Safety Engineers — Coming Soon</title>
+<meta name="description" content="Dilip Fire Safety Engineers — site launching soon. Reach us at dilipfiresafetyengineers@gmail.com.">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --panel:   #171B1A;
+    --panel-2: #1E2422;
+    --line:    #34403B;
+    --off:     #DAD6C8;
+    --off-dim: #8B9089;
+    --amber:   #E2A93B;
+    --red:     #C22A26;
+    --display: 'Oswald', sans-serif;
+    --body:    'Inter', sans-serif;
+    --mono:    'IBM Plex Mono', monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 600px at 50% 0%, rgba(226,169,59,0.06), transparent 60%),
+      var(--panel);
+    color:var(--off);
+    font-family:var(--body);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;}}
+
+  .panel{
+    width:100%;
+    max-width:520px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:var(--panel-2);
+    padding:56px 44px 40px;
+    position:relative;
+  }
+
+  /* Status strip — reads like a fire alarm panel indicator: a single
+     deliberate pulse rather than decorative motion everywhere. */
+  .status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.06em;
+    color:var(--off-dim);
+    margin-bottom:38px;
+  }
+  .status .dot{
+    width:9px;height:9px;border-radius:50%;
+    background:var(--amber);
+    box-shadow:0 0 0 0 rgba(226,169,59,.55);
+    animation:pulse 2.2s ease-in-out infinite;
+    flex-shrink:0;
+  }
+  @keyframes pulse{
+    0%   { box-shadow:0 0 0 0 rgba(226,169,59,.5); }
+    70%  { box-shadow:0 0 0 9px rgba(226,169,59,0); }
+    100% { box-shadow:0 0 0 0 rgba(226,169,59,0); }
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    font-size:clamp(28px,5vw,36px);
+    line-height:1.15;
+    color:#fff;
+  }
+  h1 .thin{
+    display:block;
+    font-weight:500;
+    color:var(--off-dim);
+    font-size:.5em;
+    letter-spacing:.16em;
+    margin-top:10px;
+  }
+
+  .rule{
+    height:1px;
+    background:var(--line);
+    margin:30px 0;
+  }
+
+  p.lede{
+    font-size:15px;
+    line-height:1.65;
+    color:var(--off-dim);
+    max-width:40ch;
+  }
+
+  .contact{
+    margin-top:30px;
+  }
+  .contact-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    color:var(--off-dim);
+    margin-bottom:8px;
+  }
+  .contact a{
+    color:var(--off);
+    text-decoration:none;
+    font-size:17px;
+    font-weight:500;
+    border-bottom:1px solid var(--red);
+    padding-bottom:2px;
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .contact a:hover{
+    color:var(--amber);
+    border-color:var(--amber);
+  }
+  .contact a:focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:4px;
+  }
+
+  footer{
+    margin-top:44px;
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--off-dim);
+    opacity:.7;
+  }
+</style>
+</head>
+<body>
+
+  <main class="panel">
+    <div class="status"><span class="dot" aria-hidden="true"></span>SITE STATUS — STANDBY</div>
+
+    <h1>
+      Dilip Fire Safety Engineers
+      <span class="thin">Coming soon</span>
+    </h1>
+
+    <div class="rule"></div>
+
+    <p class="lede">We're putting the finishing touches on our new site. Until it's live, you can reach us directly.</p>
+
+    <div class="contact">
+      <div class="contact-label">EMAIL</div>
+      <a href="mailto:dilipfiresafetyengineers@gmail.com">dilipfiresafetyengineers@gmail.com</a>
+    </div>
+
+    <footer>© <span id="year"></span> Dilip Fire Safety Engineers</footer>
+  </main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
