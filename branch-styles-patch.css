@@ -1,0 +1,49 @@
+/* ============ LOCATIONS — UPDATED for 3 branches + mini maps ============ */
+
+/* REPLACE your existing .branch-grid rule with this one
+   (old version was "repeat(2,1fr)", hardcoded for 2 cards) */
+.branch-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+  gap:24px;
+  margin-bottom:40px;
+}
+
+/* branch-card stays the same, just add these new pieces below it
+   in your stylesheet (don't duplicate .branch-card itself) */
+
+.branch-card-links{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:14px;
+}
+.branch-card a.tel{font-family:var(--mono);font-size:13.5px;color:var(--red);font-weight:600;}
+.branch-card a.directions{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.04em;
+  color:var(--ink-soft);
+  border-bottom:1px solid var(--line);
+  padding-bottom:1px;
+  transition:color .15s, border-color .15s;
+}
+.branch-card a.directions:hover{color:var(--red);border-color:var(--red);}
+
+.branch-map{
+  border:1px solid var(--line);
+  border-radius:6px;
+  overflow:hidden;
+  margin-top:4px;
+}
+.branch-map iframe{
+  width:100%;
+  height:160px;
+  border:0;
+  display:block;
+}
+
+@media (max-width:760px){
+  .branch-grid{grid-template-columns:1fr;}
+}
