@@ -4,20 +4,18 @@
    logic for the one form on the site is easy to find, audit and update
    on its own, without wading through unrelated UI code.
 
-   IMPORTANT — what client-side code can and can't do:
-   This is a static website with no server of its own, so real security
-   (the kind that can't be bypassed by someone reading this file) has to
-   live on the receiving end — the Google Apps Script endpoint. Everything
-   below reduces spam and bad submissions for genuine visitors; none of it
-   should be treated as a guarantee against a determined attacker, because
-   any value defined in this file is visible to anyone who views source.
+   This form posts to /api/contact — a Cloudflare Pages Function
+   (see /functions/api/contact.js) — rather than calling Google Apps Script
+   directly. That means the real Apps Script URL and the shared secret never
+   appear in this file or in any browser network request: they live in
+   Cloudflare's encrypted environment variables, server-side only.
 
-   For real protection, on the Apps Script side you should:
-     1. Check the shared secret server-side and reject requests without it.
-     2. Rate-limit by IP/timestamp if your Apps Script setup allows it.
-     3. Consider adding Google reCAPTCHA v3 (see the commented block below)
-        for real bot-scoring — it needs a free site key from
-        https://www.google.com/recaptcha/admin
+   Everything below (validation, honeypot, time-trap) still matters even
+   with the proxy in place — it's what makes the experience good for real
+   visitors and cuts down obviously-automated junk before it ever leaves
+   the browser. The Pages Function repeats the important checks server-side
+   too, since anything client-side can, in principle, be bypassed by a
+   determined attacker calling the endpoint directly.
    ========================================================================== */
 
 (function () {
@@ -28,9 +26,8 @@
   var submitBtn = document.getElementById('submitBtn');
   var honeypot = document.getElementById('website');
 
-  // ---- Configuration — update these for your own deployment ----
-  var SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbwsULPoEH1Z-kyY68mXQhLSGnJbuf3QC_qf3lmt2psZS_A3iedB5VpD50erXEUvg4jk/exec";
-  var FORM_SECRET = "dfse-2026-change-this"; // must match the Apps Script's expected value
+  // ---- Configuration ----
+  var SUBMIT_ENDPOINT = "/api/contact"; // same-origin — routed to Cloudflare Pages Function
   var MIN_FILL_TIME_MS = 3000; // reject submissions faster than this (likely a bot)
 
   var formRenderedAt = Date.now();
@@ -135,12 +132,15 @@
       if (data.has(key)) data.set(key, sanitizeText(data.get(key)));
     });
     data.append('submitted_at', new Date().toLocaleString());
-    data.append('secret', FORM_SECRET);
 
     try {
-      // Apps Script Web Apps don't return CORS headers by default,
-      // so this is submitted no-cors and treated as fire-and-forget.
-      await fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', body: data });
+      var res = await fetch(SUBMIT_ENDPOINT, { method: 'POST', body: data });
+      var result = null;
+      try { result = await res.json(); } catch (_) { /* non-JSON response, ignore */ }
+
+      if (!res.ok || (result && result.ok === false)) {
+        throw new Error((result && result.error) || 'Submission failed');
+      }
 
       showStatus("Thank you — we've received your requirement and will call you back shortly.", false);
       form.reset();
@@ -167,7 +167,9 @@
   /* ---- Optional: Google reCAPTCHA v3 ----
      Uncomment and add your own site key to get an invisible bot score
      alongside everything above. Requires a <script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
-     tag added to the page <head>.
+     tag added to the page <head>. Verify the token server-side in
+     functions/api/contact.js (Google's siteverify endpoint) rather than
+     trusting it client-side.
 
   grecaptcha.ready(function () {
     grecaptcha.execute('YOUR_SITE_KEY', { action: 'submit' }).then(function (token) {

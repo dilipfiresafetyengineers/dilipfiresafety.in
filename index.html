@@ -3,165 +3,1058 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dilip Fire Safety Engineers — Coming Soon</title>
-<meta name="description" content="Dilip Fire Safety Engineers — site launching soon. Reach us at dilipfiresafetyengineers@gmail.com.">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --panel:   #171B1A;
-    --panel-2: #1E2422;
-    --line:    #34403B;
-    --off:     #DAD6C8;
-    --off-dim: #8B9089;
-    --amber:   #E2A93B;
-    --red:     #C22A26;
-    --display: 'Oswald', sans-serif;
-    --body:    'Inter', sans-serif;
-    --mono:    'IBM Plex Mono', monospace;
+<!-- DFSE logo intro: scoped additions; existing website styles stay in charge. -->
+<script id="dfse-intro-boot">
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var motion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+  var navigation = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+  // Respect reduced motion, direct section links and browser history restores.
+  if (!motion || motion.matches || !Element.prototype.animate || location.hash ||
+      (navigation && navigation.type === 'back_forward')) return;
+  // Play once per browser for this site, including future visits and new tabs.
+  // Record it before opening the cover so skipping or leaving mid-intro counts.
+  try {
+    var seenKey = 'dfse.logoIntroSeen';
+    if (window.localStorage.getItem(seenKey) === '1') return;
+    window.localStorage.setItem(seenKey, '1');
+  } catch (_) {
+    // If browser storage is unavailable, show the page without an intro.
+    return;
   }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html,body{height:100%;}
-  body{
-    background:
-      radial-gradient(ellipse 900px 600px at 50% 0%, rgba(226,169,59,0.06), transparent 60%),
-      var(--panel);
-    color:var(--off);
-    font-family:var(--body);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:32px;
-    -webkit-font-smoothing:antialiased;
+  root.classList.add('dfse-intro-pending');
+  var closed = false;
+  var cleanup = null;
+  var timer = setTimeout(finish, 4500);
+  function finish() {
+    if (closed) return;
+    closed = true;
+    clearTimeout(timer);
+    root.classList.remove('dfse-intro-pending', 'dfse-intro-active');
+    if (cleanup) cleanup();
   }
-  @media (prefers-reduced-motion: reduce){*{animation-duration:.001ms !important;}}
+  window.dfseLogoIntro = {
+    get closed() { return closed; },
+    finish: finish,
+    setCleanup: function (callback) {
+      cleanup = callback;
+      if (closed) callback();
+    }
+  };
+  // Never let a slow request or a restored page leave a loading cover behind.
+  window.addEventListener('pageshow', function (event) { if (event.persisted) finish(); });
+}());
+</script>
 
-  .panel{
-    width:100%;
-    max-width:520px;
-    border:1px solid var(--line);
-    border-radius:6px;
-    background:var(--panel-2);
-    padding:56px 44px 40px;
-    position:relative;
-  }
+<title>Fire Safety Systems Hyderabad | Hydrant, Sprinkler & Fire Alarm AMC — Dilip Fire Safety Engineers</title>
+<meta name="description" content="Fire hydrant, sprinkler, fire detection & LPG gas detection systems — supply, installation and annual maintenance (AMC) in Hyderabad & Telangana. 25+ years, 24×7 emergency response. Call +91 79935 85420.">
+<meta name="robots" content="index, follow">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="canonical" href="https://www.dilipfiresafety.in/">
 
-  /* Status strip — reads like a fire alarm panel indicator: a single
-     deliberate pulse rather than decorative motion everywhere. */
-  .status{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-family:var(--mono);
-    font-size:12px;
-    letter-spacing:.06em;
-    color:var(--off-dim);
-    margin-bottom:38px;
-  }
-  .status .dot{
-    width:9px;height:9px;border-radius:50%;
-    background:var(--amber);
-    box-shadow:0 0 0 0 rgba(226,169,59,.55);
-    animation:pulse 2.2s ease-in-out infinite;
-    flex-shrink:0;
-  }
-  @keyframes pulse{
-    0%   { box-shadow:0 0 0 0 rgba(226,169,59,.5); }
-    70%  { box-shadow:0 0 0 9px rgba(226,169,59,0); }
-    100% { box-shadow:0 0 0 0 rgba(226,169,59,0); }
-  }
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Dilip Fire Safety Engineers | Fire Protection Systems — Hyderabad">
+<meta property="og:description" content="Supply, installation and annual maintenance of fire hydrant, sprinkler, fire detection and LPG gas detection systems across Hyderabad & Telangana.">
+<meta property="og:url" content="https://www.dilipfiresafety.in/">
+<meta property="og:locale" content="en_IN">
+<meta property="og:image" content="https://www.dilipfiresafety.in/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dilip Fire Safety Engineers | Fire Protection Systems — Hyderabad">
+<meta name="twitter:description" content="Fire hydrant, sprinkler, fire detection & LPG gas detection systems — supply, installation and AMC in Hyderabad & Telangana.">
+<meta name="twitter:image" content="https://www.dilipfiresafety.in/assets/og-image.jpg">
+<meta name="geo.region" content="IN-TG">
+<meta name="geo.placename" content="Hyderabad">
 
-  h1{
-    font-family:var(--display);
-    font-weight:600;
-    text-transform:uppercase;
-    letter-spacing:.01em;
-    font-size:clamp(28px,5vw,36px);
-    line-height:1.15;
-    color:#fff;
-  }
-  h1 .thin{
-    display:block;
-    font-weight:500;
-    color:var(--off-dim);
-    font-size:.5em;
-    letter-spacing:.16em;
-    margin-top:10px;
-  }
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "Dilip Fire Safety Engineers",
+  "image": "https://www.dilipfiresafety.in/assets/og-image.jpg",
+  "telephone": ["+91-79935-85420", "+91-94924-06903", "+91-79811-26961", "+91-70132-16952"],
+  "email": "dilipfiresaetyengineers@gmail.com",
+  "url": "https://www.dilipfiresafety.in/",
+  "alternateName": ["DFSE", "Dilip Fire Safety"],
+  "priceRange": "₹₹",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "RGK 84 Block, Near Dr. Prakash Nagar Colony, Rajiv Swagruha, Annojiguda, Badesahebguda",
+    "addressLocality": "Hyderabad",
+    "addressRegion": "Telangana",
+    "postalCode": "500088",
+    "addressCountry": "IN"
+  },
+  "areaServed": ["Hyderabad", "Secunderabad", "Gachibowli", "Telangana", "Andhra Pradesh"],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+    "opens": "09:00",
+    "closes": "19:00"
+  },
+  "sameAs": ["https://www.google.com/maps?cid=10450089347268521073"],
+  "makesOffer": [
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Hydrant System Installation & AMC"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Sprinkler System Installation & AMC"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Detection & Alarm System Installation & AMC"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "LPG Gas Detection System Installation & AMC"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Extinguisher Supply & Refill"}},
+    {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Fire Safety Training & Mock Drills"}}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "How much does a fire hydrant system cost in Hyderabad?", "acceptedAnswer": {"@type": "Answer", "text": "Cost depends on building height, hydrant points, pump room specification and pipe routing. Share your site plan or built-up area for a written quote after a free site visit."}},
+    {"@type": "Question", "name": "Do you provide AMC for systems installed by another company?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Dilip Fire Safety Engineers takes over AMC for existing hydrant, sprinkler, detection, LPG detection and extinguisher systems regardless of who installed them, after an initial inspection."}},
+    {"@type": "Question", "name": "Can you help with fire NOC documentation?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Installations and AMC visits come with test logs, drawings and completion certificates commonly required for Telangana fire department NOC application and renewal."}}
+  ]
+}
+</script>
 
-  .rule{
-    height:1px;
-    background:var(--line);
-    margin:30px 0;
-  }
-
-  p.lede{
-    font-size:15px;
-    line-height:1.65;
-    color:var(--off-dim);
-    max-width:40ch;
-  }
-
-  .contact{
-    margin-top:30px;
-  }
-  .contact-label{
-    font-family:var(--mono);
-    font-size:11px;
-    letter-spacing:.08em;
-    color:var(--off-dim);
-    margin-bottom:8px;
-  }
-  .contact a{
-    color:var(--off);
-    text-decoration:none;
-    font-size:17px;
-    font-weight:500;
-    border-bottom:1px solid var(--red);
-    padding-bottom:2px;
-    transition:color .2s ease, border-color .2s ease;
-  }
-  .contact a:hover{
-    color:var(--amber);
-    border-color:var(--amber);
-  }
-  .contact a:focus-visible{
-    outline:2px solid var(--amber);
-    outline-offset:4px;
-  }
-
-  footer{
-    margin-top:44px;
-    font-family:var(--mono);
-    font-size:11px;
-    color:var(--off-dim);
-    opacity:.7;
-  }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style id="dfse-intro-styles">
+/* All rules are scoped to the intro. Your existing header controls logo size. */
+#dfse-intro {
+  --dfse-intro-bg: var(--bg, var(--bg-soft, #f4f5f2));
+  --dfse-intro-ink: var(--ink, #2a2e2c);
+  --dfse-intro-red: var(--red, #e81721);
+  --dfse-intro-amber: var(--amber, #f08523);
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  isolation: isolate;
+  color: var(--dfse-intro-ink);
+  font-family: inherit;
+  pointer-events: none;
+}
+html.dfse-intro-pending #dfse-intro,
+html.dfse-intro-active #dfse-intro { display: block; }
+html.dfse-intro-pending [data-dfse-intro-logo],
+html.dfse-intro-active [data-dfse-intro-logo] { visibility: hidden !important; }
+#dfse-intro-veil {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background-color: var(--dfse-intro-bg);
+  pointer-events: auto;
+}
+.dfse-intro-glow {
+  position: absolute;
+  width: min(105vw, 900px);
+  aspect-ratio: 1;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: .075;
+  background: radial-gradient(ellipse, var(--dfse-intro-amber) 0%, var(--dfse-intro-red) 28%, transparent 65%);
+}
+#dfse-intro-logo {
+  position: fixed;
+  display: block;
+  width: min(70vw, 460px);
+  height: auto;
+  max-width: none;
+  max-height: none;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: 0 0;
+  object-fit: contain;
+  visibility: hidden;
+  pointer-events: none;
+  margin: 0;
+}
+#dfse-intro-caption {
+  position: fixed;
+  top: calc(48% + min(35vw, 230px));
+  left: 50%;
+  width: min(88vw, 500px);
+  margin: 18px 0 0;
+  transform: translateX(-50%);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+}
+#dfse-intro-caption strong {
+  display: block;
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(20px, 3.5vw, 30px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+#dfse-intro-caption span {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--mono, 'IBM Plex Mono', monospace);
+  font-size: 12px;
+  line-height: 1.5;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink-soft, #686e69);
+}
+#dfse-intro-caption::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 2px;
+  margin: 17px auto 0;
+  background: linear-gradient(90deg, var(--dfse-intro-red), var(--dfse-intro-amber));
+}
+#dfse-intro-skip {
+  position: fixed;
+  top: max(18px, env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid var(--line, #d7dcd6);
+  border-radius: 4px;
+  background: var(--dfse-intro-bg);
+  color: var(--dfse-intro-ink);
+  font: 500 14px/1.4 'Inter', sans-serif;
+  cursor: pointer;
+  pointer-events: auto;
+}
+#dfse-intro-skip:hover { border-color: var(--dfse-intro-red); }
+#dfse-intro-skip:focus-visible { outline: 2px solid var(--dfse-intro-red); outline-offset: 4px; }
+@media (max-height: 530px) { #dfse-intro-caption { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html #dfse-intro { display: none !important; }
+  html [data-dfse-intro-logo] { visibility: visible !important; }
+}
 </style>
+
 </head>
+
+<!-- Replace G-XXXXXXXXXX with your GA4 Measurement ID, and AW-XXXXXXXXX with your Google Ads Conversion ID once you have them. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 <body>
-
-  <main class="panel">
-    <div class="status"><span class="dot" aria-hidden="true"></span>SITE STATUS — STANDBY</div>
-
-    <h1>
-      Dilip Fire Safety Engineers
-      <span class="thin">Coming soon</span>
-    </h1>
-
-    <div class="rule"></div>
-
-    <p class="lede">We're putting the finishing touches on our new site. Until it's live, you can reach us directly.</p>
-
-    <div class="contact">
-      <div class="contact-label">EMAIL</div>
-      <a href="mailto:dilipfiresafetyengineers@gmail.com">dilipfiresafetyengineers@gmail.com</a>
+  <!-- Cinematic logo entrance. The logo source is copied from the real header. -->
+  <div id="dfse-intro">
+    <div id="dfse-intro-veil" aria-hidden="true"><div class="dfse-intro-glow"></div></div>
+    <img id="dfse-intro-logo" alt="" aria-hidden="true">
+    <div id="dfse-intro-caption" aria-hidden="true">
+      <strong>Dilip Fire Safety Engineers</strong>
+      <span>Fire Protection Specialists</span>
     </div>
+    <button id="dfse-intro-skip" type="button">Skip intro</button>
+  </div>
 
-    <footer>© <span id="year"></span> Dilip Fire Safety Engineers</footer>
+
+  <header>
+    <nav class="nav">
+      <a href="index.html" class="brand">
+        <span class="brand-mark"><img data-dfse-intro-logo decoding="async" fetchpriority="high" src="assets/logo.svg" alt="Dilip Fire Safety Engineers logo"></span>
+        <span class="brand-name">Dilip Fire Safety Engineers<span>Fire Protection Specialists</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <div class="nav-dropdown">
+          <span>Services <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          <div class="dropdown-menu">
+            <a href="fire-extinguisher-supply-refilling.html">Fire Extinguisher Supply & Refilling</a>
+            <a href="fire-hydrant-system.html">Fire Hydrant System</a>
+            <a href="fire-alarm-detection-system.html">Fire Alarm & Detection System</a>
+            <a href="amc-maintenance.html">AMC & Maintenance</a>
+            <a href="fire-safety-training.html">Fire Safety Training</a>
+          </div>
+        </div>
+        <a href="products.html">Catalog</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="tel:+917993585420" class="btn btn-call">Call Now</a>
+        <a href="contact.html" class="btn btn-primary">Get a Quote</a>
+      </div>
+      <button class="nav-burger" id="navBurger" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="fire-extinguisher-supply-refilling.html">Fire Extinguisher Supply & Refilling</a>
+      <a href="fire-hydrant-system.html">Fire Hydrant System</a>
+      <a href="fire-alarm-detection-system.html">Fire Alarm & Detection System</a>
+      <a href="amc-maintenance.html">AMC & Maintenance</a>
+      <a href="fire-safety-training.html">Fire Safety Training</a>
+      <a href="products.html">Catalog</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <main>
+  <!-- ============ HERO ============ -->
+  <div id="top"></div>
+  <section class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Fire Protection Systems · Supply · Installation · AMC</div>
+        <h1>When seconds matter, <em>your systems must not fail.</em></h1>
+        <p class="hero-sub">Dilip Fire Safety Engineers designs, installs and maintains fire hydrant, sprinkler, detection & alarm, and LPG gas detection systems — so your building, factory or facility stays compliant and protected, every single day.</p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn btn-primary">Request a Site Visit</a>
+          <a href="tel:+917993585420" class="btn btn-outline">Call +91 79935 85420</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><b>25+</b><span>Years in Service</span></div>
+          <div class="hero-stat"><b>200+</b><span>Systems Installed</span></div>
+          <div class="hero-stat"><b>24×7</b><span>Emergency Response</span></div>
+        </div>
+      </div>
+
+      <div class="hero-panel">
+        <div class="hero-panel-head">
+          <span>Facp — Zone Status</span>
+          <span class="live">Live Monitored</span>
+        </div>
+        <div class="zone-row"><span class="zone-code">Z01</span><span class="zone-led"></span><span class="zone-name">Fire Hydrant System</span><span class="zone-tag">NORMAL</span></div>
+        <div class="zone-row"><span class="zone-code">Z02</span><span class="zone-led"></span><span class="zone-name">Sprinkler System</span><span class="zone-tag">NORMAL</span></div>
+        <div class="zone-row"><span class="zone-code">Z03</span><span class="zone-led"></span><span class="zone-name">Fire Detection & Alarm</span><span class="zone-tag">NORMAL</span></div>
+        <div class="zone-row"><span class="zone-code">Z04</span><span class="zone-led"></span><span class="zone-name">LPG Gas Detection</span><span class="zone-tag">NORMAL</span></div>
+        <div class="zone-row"><span class="zone-code">Z05</span><span class="zone-led"></span><span class="zone-name">Fire Extinguishers</span><span class="zone-tag">NORMAL</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST BANNER ============ -->
+  <section class="trust-banner">
+    <div class="wrap">
+      <div class="trust-row">
+        <svg class="ext-icon" viewBox="0 0 120 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="30" y="52" width="46" height="88" rx="20" fill="var(--red)"/>
+          <rect x="42" y="22" width="18" height="32" fill="#2A2E2C"/>
+          <polygon points="28,22 78,22 66,36 40,36" fill="#2A2E2C"/>
+          <line x1="18" y1="42" x2="-2" y2="10" stroke="#2A2E2C" stroke-width="6" stroke-linecap="round"/>
+          <circle class="spray s1" cx="-2" cy="8" r="4" fill="var(--amber)"/>
+          <circle class="spray s2" cx="-2" cy="8" r="3" fill="var(--amber)"/>
+          <circle class="spray s3" cx="-2" cy="8" r="3.5" fill="var(--amber)"/>
+        </svg>
+        <div class="trust-big">
+          <span>Dilip Fire Safety</span>
+          <span class="accent">Engineers</span>
+        </div>
+      </div>
+      <div class="trust-highlights">
+        <div class="trust-pill">
+          <b>Best Prices In The Market</b>
+          <p>We price our supply, installation and AMC work to be genuinely affordable — compare us against other fire safety companies in Hyderabad before you decide.</p>
+        </div>
+        <div class="trust-pill">
+          <b>Service, Next Level</b>
+          <p>Faster site response, clean compliance documentation, and AMC visits that actually happen on schedule — every time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT (summary — full story on about.html) ============ -->
+  <section id="about">
+    <div class="wrap about-grid">
+      <div>
+        <div class="section-head" style="margin-bottom:24px;">
+          <div class="eyebrow">About the Company</div>
+          <h2>Engineering safety, ensuring compliance.</h2>
+        </div>
+        <div class="about-copy">
+          <p>Dilip Fire Safety Engineers is a full-service fire protection company handling everything from initial design and supply through to installation and ongoing annual maintenance, for factories, warehouses, hospitals, malls, residential complexes and commercial buildings across Hyderabad and Telangana.</p>
+          <p>Our focus is simple: every system we touch should work exactly as intended in the one moment it's actually needed.</p>
+          <p><a href="about.html" style="color:var(--red);font-weight:600;">Read our full story →</a></p>
+        </div>
+        <div class="cert-row">
+          <span class="cert-pill">Licensed Fire Contractors</span>
+          <span class="cert-pill">NBC-Compliant Design</span>
+          <span class="cert-pill">Trained Technicians</span>
+          <span class="cert-pill">AMC Support</span>
+        </div>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat"><b>25+</b><span>Years of Experience</span></div>
+        <div class="about-stat"><b>200+</b><span>Installations Completed</span></div>
+        <div class="about-stat"><b>150+</b><span>Active AMC Clients</span></div>
+        <div class="about-stat"><b>24×7</b><span>Emergency Call-Out</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SERVICES — control panel ============ -->
+  <section id="services" class="services">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Our Services</div>
+        <h2>Every fire safety service under one roof.</h2>
+        <p>Supply, installation, testing and annual maintenance — for every core fire safety system your site needs.</p>
+      </div>
+      <div class="zone-grid">
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 01</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3v4M7 6l2.5 2.5M17 6l-2.5 2.5M12 10a4 4 0 100 8 4 4 0 000-8zM12 18v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Fire Hydrant Systems</h3>
+            <p>External & internal hydrant networks, landing valves, hose reels, pumps and underground/terrace tanks — designed to code.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>Covers internal & external hydrant networks, single/double-headed landing valves, hose reels, hydrant pumps (electric, diesel & jockey) and underground or terrace storage tanks — designed to NBC and local fire NOC norms.</p>
+            <a class="zone-detail-link" href="fire-hydrant-system.html">Read more about hydrant systems →</a>
+          </div>
+        </details>
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 02</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M12 9v3M6 20l3-6M18 20l-3-6M12 12l0 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Sprinkler Systems</h3>
+            <p>Wet & dry pipe sprinkler layouts sized for occupancy risk, with full flushing, flow-testing and commissioning.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>Wet-pipe and dry-pipe layouts using pendent, upright and sidewall heads, alarm valves and flow switches — configured for your building's hazard classification, with full flushing and commissioning before sign-off.</p>
+            <a class="zone-detail-link" href="products.html#sprinkler">Browse sprinkler products →</a>
+          </div>
+        </details>
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 03</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Fire Detection & Alarm Systems</h3>
+            <p>Addressable & conventional smoke/heat detectors, FACP panels, hooters and manual call points, fully zoned.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>Addressable and conventional smoke/heat detectors, manual call points, hooters and response indicators — wired into a fire alarm control panel (FACP) with a fully documented zone map for your building.</p>
+            <a class="zone-detail-link" href="fire-alarm-detection-system.html">Read more about detection & alarm →</a>
+          </div>
+        </details>
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 04</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 6v9a2 2 0 01-2 2H7a2 2 0 01-2-2V9l7-6z" stroke="currentColor" stroke-width="1.6"/><path d="M12 12v4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="17.5" r=".6" fill="currentColor"/></svg>
+            <h3>LPG Gas Detection Systems</h3>
+            <p>Gas leak sensors and auto-shutoff solenoid valves for kitchens, gas banks and industrial LPG storage areas.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>Gas leak sensors, auto-shutoff solenoid valves and dedicated control panels for kitchens, gas banks and industrial LPG storage areas, with audible and visual alarm on leak detection.</p>
+            <a class="zone-detail-link" href="products.html#lpg">Browse gas detection products →</a>
+          </div>
+        </details>
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 05</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><path d="M9 3h6l1 3H8l1-3z" stroke="currentColor" stroke-width="1.6"/><path d="M7 6h10l-1 15H8L7 6z" stroke="currentColor" stroke-width="1.6"/></svg>
+            <h3>Fire Extinguishers — Supply & Refill</h3>
+            <p>ABC, CO2, water and foam type extinguishers, with scheduled refilling and hydrostatic testing.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>ABC, CO2, water, foam and modular/automatic type extinguishers, supplied with ISI-marked cylinders, wall mounting and signage, plus a scheduled refilling and hydrostatic testing calendar.</p>
+            <a class="zone-detail-link" href="fire-extinguisher-supply-refilling.html">Read more about extinguisher supply →</a>
+          </div>
+        </details>
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 06</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><path d="M12 4l1.2 2.5 2.8.4-2 2 .5 2.7L12 10.2 9.5 11.6l.5-2.7-2-2 2.8-.4L12 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M5 20a7 7 0 0114 0" stroke="currentColor" stroke-width="1.6"/></svg>
+            <h3>Annual Maintenance Contracts (AMC)</h3>
+            <p>Scheduled inspection, testing and servicing across all systems above — with compliance documentation.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>Quarterly, half-yearly or annual visits across every system above, with signed test logs, compliance certificates for your fire NOC renewal, and priority call-out support for AMC clients.</p>
+            <a class="zone-detail-link" href="amc-maintenance.html">Read more about AMC plans →</a>
+          </div>
+        </details>
+
+        <details class="zone-card">
+          <summary>
+            <div class="zone-card-top"><span class="zone-num">ZONE 07</span><span class="zone-status">ACTIVE</span></div>
+            <svg class="zone-icon" viewBox="0 0 24 24" fill="none"><circle cx="9" cy="7" r="2.5" stroke="currentColor" stroke-width="1.6"/><circle cx="17" cy="8" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 20c0-3 2.5-5 5-5s5 2 5 5M14 20c0-2.5 1.8-4 4-4s4 1.5 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Fire Safety Training & Mock Drills</h3>
+            <p>Evacuation drills, extinguisher usage training and fire warden certification for your staff.</p>
+            <span class="zone-more">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail">
+            <p>On-site evacuation drills, hands-on extinguisher usage training, fire warden certification and classroom emergency-response sessions — scheduled to suit your building's operating hours.</p>
+            <a class="zone-detail-link" href="fire-safety-training.html">Read more about training →</a>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROCESS ============ -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">How It Works</div>
+        <h2>From enquiry to a system that's ready when it matters.</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <div class="process-num">01 / SUBMIT</div>
+          <h3>Tell us your requirement</h3>
+          <p>Fill our contact form or call us with your site type, systems needed and location. Takes under two minutes.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02 / VISIT & QUOTE</div>
+          <h3>Site visit and proposal</h3>
+          <p>Our engineer visits, assesses the site, and shares a clear quote covering design, equipment and timelines.</p>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03 / INSTALL & MAINTAIN</div>
+          <h3>Installation and AMC</h3>
+          <p>We install, test and commission the system, then keep it running with a scheduled annual maintenance plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIALS + GOOGLE RATING ============ -->
+  <section id="testimonials">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Client Feedback</div>
+        <h2>What clients say after the system goes live.</h2>
+      </div>
+
+      <div class="google-rating">
+        <div><div class="score">4.8</div></div>
+        <div>
+          <div class="stars">★★★★★</div>
+          <div class="meta">Based on Google reviews — <a href="#" style="color:var(--red);font-weight:600;">Read all reviews →</a></div>
+        </div>
+      </div>
+
+      <div class="testi-grid">
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Handled our entire hydrant and sprinkler installation across two factory blocks. Documentation for the fire NOC was ready exactly when we needed it."</p>
+          <div class="testi-who">
+            <div class="testi-avatar">RK</div>
+            <div><b>Facility Manager</b><span>Manufacturing Unit, Hyderabad</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"We moved our AMC to Dilip Fire Safety Engineers after our previous vendor kept missing service dates. Every visit has been on schedule since."</p>
+          <div class="testi-who">
+            <div class="testi-avatar">SP</div>
+            <div><b>Admin Head</b><span>Commercial Complex</span></div>
+          </div>
+        </div>
+        <div class="testi-card">
+          <div class="stars">★★★★★</div>
+          <p>"Good response time on our gas detection system fault — technician was on site within a few hours of our call. That responsiveness matters a lot to us."</p>
+          <div class="testi-who">
+            <div class="testi-avatar">MA</div>
+            <div><b>Operations Head</b><span>Hospitality Property</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST PARTNERS ============ -->
+  <section id="partners">
+    <div class="wrap">
+      <div class="section-head" style="margin-bottom:32px;">
+        <div class="eyebrow">Trusted By</div>
+        <h2>Companies who trust us with their fire safety.</h2>
+      </div>
+      <div class="partners-viewport" id="partnersViewport">
+        <!--
+          HOW TO ADD YOUR OWN CLIENT LOGOS:
+          1. Save each logo as a transparent-background PNG in the assets/partners/ folder.
+          2. Add one more <img> line below, pointing to your new file.
+          3. The row centers itself automatically; it only starts auto-scrolling once
+             there are enough logos to overflow the row width. No other change needed.
+        -->
+        <div class="partners-track" id="partnersTrack">
+          <img src="assets/partners/partner-01.png" alt="Partner company logo" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="assets/partners/partner-02.png" alt="Partner company logo" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="assets/partners/partner-03.png" alt="Partner company logo" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="assets/partners/partner-04.png" alt="Partner company logo" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="assets/partners/partner-05.png" alt="Partner company logo" loading="lazy" decoding="async" onerror="this.remove()">
+          <img src="assets/partners/partner-06.png" alt="Partner company logo" loading="lazy" decoding="async" onerror="this.remove()">
+        </div>
+      </div>
+      <p style="font-size:12px;color:var(--ink-soft);text-align:center;margin-top:14px;font-family:var(--mono);">Sample placeholder marks shown — swap in your real client logos in assets/partners/</p>
+    </div>
+  </section>
+
+  <!-- ============ LOCATIONS ============ -->
+  <section id="locations" style="background:var(--bg-soft);">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Locations</div>
+        <h2>Where to find us.</h2>
+      </div>
+
+      <div class="branch-grid">
+        <div class="branch-card">
+          <div class="eyebrow" style="margin-bottom:6px;">Head Office</div>
+          <h3>Hyderabad Branch</h3>
+          <address>RGK 84 Block, Near Dr. Prakash Nagar Colony, Rajiv Swagruha, Annojiguda, Hyderabad, Badesahebguda, Telangana — 500088</address>
+          <div class="branch-card-links">
+            <a class="tel" href="tel:+917993585420">+91 79935 85420</a>
+            <a class="directions" href="https://www.google.com/maps?cid=10450089347268521073" target="_blank" rel="noopener">Get Directions →</a>
+          </div>
+        </div>
+        <div class="branch-card">
+          <div class="eyebrow" style="margin-bottom:6px;">Sales Office</div>
+          <h3>Gachibowli Branch (Online)</h3>
+          <address>UCO Bank Line, Vinayak Nagar, Indira Nagar, Gachibowli, Hyderabad, Telangana — 500032 (Sales Operations Only)</address>
+          <div class="branch-card-links">
+            <a class="tel" href="tel:+919492406903">+91 94924 06903</a>
+            <a class="directions" href="https://www.google.com/maps/search/?api=1&query=UCO+Bank+Line+Vinayak+Nagar+Indira+Nagar+Gachibowli+Hyderabad" target="_blank" rel="noopener">Get Directions →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-embed">
+        <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d951.6663758418688!2d78.6678182!3d17.4278331!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb75cf65960ebd%3A0x91062ce4f708ac71!2sDilip%20Fire%20Safety%20Engineers!5e0!3m2!1sen!2sin!4v1788955298472!5m2!1sen!2sin"
+    loading="lazy"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen="">
+  </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Frequently Asked</div>
+        <h2>Common questions before you call.</h2>
+      </div>
+      <div class="zone-grid" style="background:var(--line);border-color:var(--line);">
+        <details class="zone-card" style="background:var(--bg-soft);color:var(--ink);">
+          <summary>
+            <h3 style="color:var(--ink);">How much does a fire hydrant system cost in Hyderabad?</h3>
+            <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail" style="border-color:var(--line);">
+            <p style="color:var(--ink-soft);">Cost depends on building height, hydrant points, pump room specification and pipe routing. Share your site plan or built-up area with us and we'll give you a written quote after a free site visit.</p>
+          </div>
+        </details>
+        <details class="zone-card" style="background:var(--bg-soft);color:var(--ink);">
+          <summary>
+            <h3 style="color:var(--ink);">Do you provide AMC for systems installed by another company?</h3>
+            <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail" style="border-color:var(--line);">
+            <p style="color:var(--ink-soft);">Yes. We take over AMC for existing hydrant, sprinkler, detection, LPG detection and extinguisher systems regardless of who installed them, after an initial inspection.</p>
+          </div>
+        </details>
+        <details class="zone-card" style="background:var(--bg-soft);color:var(--ink);">
+          <summary>
+            <h3 style="color:var(--ink);">Can you help with fire NOC documentation?</h3>
+            <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+          </summary>
+          <div class="zone-detail" style="border-color:var(--line);">
+            <p style="color:var(--ink-soft);">Yes. Our installations and AMC visits come with the test logs, drawings and completion certificates most Telangana fire departments ask for during NOC application and renewal.</p>
+          </div>
+          
+        </details>
+        <details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Which fire extinguisher is suitable for my shop, office or building?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">The right fire extinguisher depends on the type of fire risk at your premises. We can assess your shop, office, warehouse, commercial building or industrial site and recommend suitable extinguishers such as ABC, CO2, DCP or other types based on the requirement.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you provide fire extinguisher refilling and servicing?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. We provide fire extinguisher inspection, servicing, refilling and maintenance for different types of extinguishers. Contact us with the extinguisher type and quantity for service details and pricing.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">How often should fire extinguishers be inspected or serviced?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Fire extinguishers should be checked regularly for pressure, damage, accessibility and overall condition, with servicing carried out according to the extinguisher type, applicable standards and manufacturer requirements. Our team can inspect your extinguishers and advise when servicing or refilling is required.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you install fire alarm and smoke detection systems?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. We undertake fire alarm and detection system projects for commercial, residential and industrial premises, including control panels, smoke and heat detectors, manual call points, hooters and related equipment based on project requirements.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you provide a site visit before giving a quotation?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. For projects where a site assessment is required, our team can inspect the premises, understand the fire safety requirements and prepare a quotation based on the scope of work, equipment and installation requirements.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">How much does a complete fire safety system cost?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">The cost depends on the size and type of property, fire risks, required equipment and project scope. A small shop may only require basic fire safety equipment, while larger buildings may require hydrant, sprinkler, alarm and detection systems. Contact us with your requirements for a quotation.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you provide AMC for fire safety systems?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. We provide Annual Maintenance Contract (AMC) services for fire hydrant, sprinkler, fire alarm, detection, extinguisher and other fire safety systems. Existing systems installed by other companies can also be considered after inspection.</p> 
+  </div> 
+</details>
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you provide fire safety services for small shops and businesses?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. We provide fire safety solutions for small shops, offices, restaurants, clinics, warehouses and other businesses. Whether you need a single fire extinguisher or a complete fire safety system, we can recommend and install the right solution based on your premises and requirements.</p> 
+  </div> 
+</details>
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you provide fire safety services all over India?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. Dilip Fire Safety Engineers undertakes fire safety projects across India. Our team can support commercial, industrial, residential and institutional projects based on the site requirements and scope of work.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you install fire hydrant systems?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. We undertake complete fire hydrant system projects, including system planning, piping, hydrant points, hose reels, valves, pumps, accessories, installation, testing and commissioning according to project requirements.</p> 
+  </div> 
+</details>
+
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Do you handle hydrant, fire alarm and other fire safety projects across India?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. We undertake fire hydrant, sprinkler, fire alarm, fire detection, LPG detection, fire extinguisher and other fire safety projects across India. Our services are not limited to Hyderabad and Telangana; we can execute projects nationwide based on project requirements.</p> 
+  </div> 
+</details>
+<details class="zone-card" style="background:var(--bg-soft);color:var(--ink);"> 
+  <summary> 
+    <h3 style="color:var(--ink);">Can I contact you for only one fire extinguisher?</h3> 
+    <span class="zone-more" style="color:var(--red);">Click for more <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> 
+  </summary> 
+  <div class="zone-detail" style="border-color:var(--line);"> 
+    <p style="color:var(--ink-soft);">Yes. You can contact us for small requirements as well as complete fire safety projects. Whether you need a single fire extinguisher for a shop or a complete system for a commercial or industrial facility, our team can assist you.</p> 
+  </div> 
+</details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT CTA (full form lives on contact.html) ============ -->
+  <section id="contact" class="contact">
+    <div class="wrap" style="text-align:center;">
+      <div class="section-head" style="margin:0 auto 28px;">
+        <div class="eyebrow" style="justify-content:center;">Get In Touch</div>
+        <h2>Tell us what your site needs.</h2>
+        <p>Share your requirement and our team will call you back — usually within a business day. For urgent breakdowns, please call directly.</p>
+      </div>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href="contact.html" class="btn btn-primary">Go To Contact Form</a>
+        <a href="tel:+917993585420" class="btn btn-outline">Call +91 79935 85420</a>
+      </div>
+    </div>
+  </section>
   </main>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  <!-- ============ FOOTER ============ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="Dilip Fire Safety Engineers logo" style="height:48px;width:48px;border-radius:8px;margin-bottom:12px;">
+        <span class="brand-name" style="color:var(--white);">Dilip Fire Safety<span style="color:#7C837E;">Engineers</span></span>
+        <p>Supply, installation and annual maintenance of fire hydrant, sprinkler, detection & alarm, and LPG gas detection systems.</p>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="index.html#testimonials">Reviews</a></li>
+          <li><a href="index.html#locations">Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="fire-hydrant-system.html">Fire Hydrant System</a></li>
+          <li><a href="fire-alarm-detection-system.html">Fire Alarm & Detection</a></li>
+          <li><a href="fire-extinguisher-supply-refilling.html">Extinguisher Supply & Refilling</a></li>
+          <li><a href="amc-maintenance.html">AMC & Maintenance</a></li>
+          <li><a href="fire-safety-training.html">Training & Mock Drills</a></li>
+          <li><a href="products.html">Product Catalog</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+917993585420">+91 79935 85420 (Primary)</a></li>
+          <li><a href="tel:+919492406903">+91 94924 06903 (Sales)</a></li>
+          <li><a href="tel:+917981126961">+91 79811 26961 (Technician)</a></li>
+          <li><a href="tel:+917013216952">+91 70132 16952 (Other)</a></li>
+          <li><a href="mailto:dilipfiresaetyengineers@gmail.com">dilipfiresaetyengineers@gmail.com</a></li>
+          <li>Hyderabad, Telangana</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Dilip Fire Safety Engineers. All rights reserved.</span>
+      <span>Site designed for fast, mobile-first enquiries.</span>
+    </div>
+  </footer>
+
+  <!-- ============ MOBILE STICKY CALL BAR ============ -->
+  <div class="mobile-call-bar">
+    <a href="tel:+917993585420" class="btn btn-primary">Call Now — +91 79935 85420</a>
+  </div>
+
+<script id="dfse-intro-controller">
+(function () {
+  'use strict';
+  const intro = window.dfseLogoIntro;
+  if (!intro || intro.closed) return;
+
+  const root = document.documentElement;
+  const target = document.querySelector('[data-dfse-intro-logo]');
+  const layer = document.getElementById('dfse-intro');
+  const logo = document.getElementById('dfse-intro-logo');
+  const veil = document.getElementById('dfse-intro-veil');
+  const caption = document.getElementById('dfse-intro-caption');
+  const skip = document.getElementById('dfse-intro-skip');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const animations = [];
+  const cleanups = [];
+  const previouslyFocused = document.activeElement;
+  let preparationTimer;
+  let finishTimer;
+
+  intro.setCleanup(function () {
+    clearTimeout(preparationTimer);
+    clearTimeout(finishTimer);
+    const restoreFocus = document.activeElement === skip;
+    animations.forEach(function (animation) { animation.cancel(); });
+    cleanups.forEach(function (cleanup) { cleanup(); });
+    if (restoreFocus) {
+      const focusTarget = previouslyFocused && previouslyFocused !== document.body
+        ? previouslyFocused : target && target.closest('a');
+      if (focusTarget && focusTarget.focus) focusTarget.focus({ preventScroll: true });
+    }
+    if (layer) layer.remove();
+  });
+
+  if (!target || !layer || !logo || !veil || !caption || !skip || reducedMotion.matches || document.hidden) {
+    intro.finish();
+    return;
+  }
+
+  function listen(node, event, listener, options) {
+    node.addEventListener(event, listener, options);
+    cleanups.push(function () { node.removeEventListener(event, listener, options); });
+  }
+
+  listen(skip, 'click', intro.finish);
+  listen(window, 'resize', intro.finish, { passive: true });
+  listen(window, 'scroll', intro.finish, { passive: true });
+  listen(document, 'keydown', function (event) {
+    // Any keyboard navigation moves immediately into the real site.
+    if (event.key === 'Escape' || event.key === 'Tab') intro.finish();
+  });
+  listen(document, 'visibilitychange', function () { if (document.hidden) intro.finish(); });
+  if (reducedMotion.addEventListener) {
+    listen(reducedMotion, 'change', function () { if (reducedMotion.matches) intro.finish(); });
+  }
+
+  // Inherit the actual page's solid background. CSS variables are the fallback.
+  const backgrounds = [document.body, root];
+  for (const element of backgrounds) {
+    const color = getComputedStyle(element).backgroundColor;
+    if (color && color !== 'transparent' && !/rgba\([^)]*,\s*0(?:\.0+)?\s*\)/.test(color)) {
+      layer.style.setProperty('--dfse-intro-bg', color);
+      break;
+    }
+  }
+  const name = document.querySelector('header .brand-name');
+  if (name) {
+    const nameStyle = getComputedStyle(name);
+    caption.querySelector('strong').style.fontFamily = nameStyle.fontFamily;
+    caption.querySelector('strong').style.fontWeight = nameStyle.fontWeight;
+  }
+
+  function animate(element, frames, options) {
+    const animation = element.animate(frames, options);
+    animations.push(animation);
+    return animation;
+  }
+
+  function run() {
+    if (intro.closed) return;
+    if (window.scrollY > 8 || !target.complete || !target.naturalWidth || !logo.naturalWidth) {
+      intro.finish();
+      return;
+    }
+    const rect = target.getBoundingClientRect();
+    if (!rect.width || !rect.height || rect.bottom <= 0 || rect.top >= window.innerHeight) {
+      intro.finish();
+      return;
+    }
+
+    // Measure after fonts are ready. The endpoint is the real header image,
+    // so the same animation works with the existing desktop and mobile CSS.
+    const imageStyle = getComputedStyle(target);
+    Object.assign(logo.style, {
+      top: '0', left: '0', width: rect.width + 'px', height: rect.height + 'px',
+      objectFit: imageStyle.objectFit, objectPosition: imageStyle.objectPosition,
+      borderRadius: imageStyle.borderRadius, visibility: 'visible'
+    });
+    const vw = document.documentElement.clientWidth;
+    const vh = window.innerHeight;
+    const scale = Math.min(vw * .72 / rect.width, vh * .49 / rect.height, 460 / rect.width);
+    const centerY = vh < 530 ? vh * .5 : vh * .42;
+    const centered = function (zoom) {
+      return 'translate3d(' + ((vw - rect.width * zoom) / 2) + 'px,' +
+        (centerY - rect.height * zoom / 2) + 'px,0) scale(' + zoom + ')';
+    };
+    const dock = 'translate3d(' + rect.left + 'px,' + rect.top + 'px,0) scale(1)';
+    caption.style.top = (centerY + rect.height * scale / 2) + 'px';
+
+    root.classList.add('dfse-intro-active');
+    root.classList.remove('dfse-intro-pending');
+    // The cover handles pointer input. Restore any prior inert state on exit.
+    document.querySelectorAll('body > header, body > main, body > footer, .mobile-call-bar').forEach(function (element) {
+      const wasInert = element.inert;
+      element.inert = true;
+      cleanups.push(function () { element.inert = wasInert; });
+    });
+
+    try {
+      const flight = animate(logo, [
+        { offset: 0, transform: centered(scale * 1.35), opacity: 0, filter: 'blur(9px) brightness(.9)', easing: 'cubic-bezier(.16,1,.3,1)' },
+        { offset: .25, transform: centered(scale * 1.03), opacity: 1, filter: 'blur(0px) brightness(1.06)', easing: 'cubic-bezier(.2,.6,.35,1)' },
+        { offset: .43, transform: centered(scale), opacity: 1, filter: 'blur(0px) brightness(1)', easing: 'cubic-bezier(.76,0,.19,1)' },
+        { offset: 1, transform: dock, opacity: 1, filter: 'blur(0px) brightness(1)' }
+      ], { duration: 2500, fill: 'both' });
+
+      animate(veil, [
+        { offset: 0, opacity: 1 },
+        { offset: .47, opacity: 1, easing: 'cubic-bezier(.3,0,.2,1)' },
+        { offset: .91, opacity: 0 },
+        { offset: 1, opacity: 0 }
+      ], { duration: 2500, fill: 'both' });
+
+      animate(caption, [
+        { offset: 0, opacity: 0, transform: 'translate(-50%, 12px)' },
+        { offset: .25, opacity: 0, transform: 'translate(-50%, 12px)', easing: 'ease-out' },
+        { offset: .49, opacity: 1, transform: 'translate(-50%, 0)' },
+        { offset: .68, opacity: 1, transform: 'translate(-50%, 0)', easing: 'ease-in' },
+        { offset: 1, opacity: 0, transform: 'translate(-50%, -6px)' }
+      ], { duration: 1650, fill: 'both' });
+
+      animate(layer.querySelector('.dfse-intro-glow'), [
+        { opacity: 0, transform: 'translate(-50%, -50%) scale(.8)' },
+        { offset: .4, opacity: .12, transform: 'translate(-50%, -50%) scale(1)' },
+        { opacity: 0, transform: 'translate(-50%, -50%) scale(1.15)' }
+      ], { duration: 1800, fill: 'both' });
+
+      document.querySelectorAll('header .brand-name, header .nav-links, header .nav-cta, header .nav-burger, .hero-grid').forEach(function (element) {
+        const finalOpacity = getComputedStyle(element).opacity;
+        animate(element, [{ opacity: 0 }, { opacity: finalOpacity }], {
+          duration: 850, delay: 1500, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'both'
+        });
+      });
+      animate(skip, [{ opacity: 1 }, { opacity: 0 }], { duration: 400, delay: 1650, fill: 'both' });
+      finishTimer = setTimeout(intro.finish, 2850);
+      flight.finished.then(intro.finish).catch(intro.finish);
+    } catch (_) {
+      intro.finish();
+    }
+  }
+
+  // No new network request: reuse the supplied SVG embedded in the header.
+  logo.src = target.currentSrc || target.src;
+  function decoded(image) {
+    if (typeof image.decode === 'function') return image.decode();
+    if (image.complete) return image.naturalWidth ? Promise.resolve() : Promise.reject(new Error('Logo unavailable'));
+    return new Promise(function (resolve, reject) {
+      listen(image, 'load', resolve, { once: true });
+      listen(image, 'error', reject, { once: true });
+    });
+  }
+  const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+  const ready = Promise.all([decoded(target), decoded(logo), fonts]);
+  // Slow fonts must not turn a short brand entrance into a wait for the page.
+  const budget = new Promise(function (resolve) { preparationTimer = setTimeout(resolve, 600); });
+  Promise.race([ready, budget]).then(function () {
+    clearTimeout(preparationTimer);
+    requestAnimationFrame(function () { requestAnimationFrame(run); });
+  }).catch(intro.finish);
+}());
 </script>
+
+  <script src="main.js"></script>
 </body>
 </html>

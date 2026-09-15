@@ -85,6 +85,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(237,234,225,.92);backdro
   padding:8px;min-width:250px;box-shadow:0 16px 32px -8px rgba(0,0,0,.16);
   display:none;margin-top:10px;
 }
+/* Invisible bridge over the gap above the menu, so moving the mouse straight
+   down from "Services" into the menu never leaves a hoverable element. */
+.dropdown-menu::before{
+  content:"";position:absolute;left:0;right:0;top:-10px;height:10px;background:transparent;
+}
 .nav-dropdown:hover .dropdown-menu{display:block;}
 .dropdown-menu a{display:block;padding:9px 12px;border-radius:6px;font-size:13.5px;color:var(--ink);}
 .dropdown-menu a:hover{background:var(--bg-soft);color:var(--red);}
@@ -260,12 +265,20 @@ details[open] .zone-more svg{transform:rotate(180deg);}
 @media (prefers-reduced-motion: reduce){ .partners-track.is-scrolling{animation:none;} }
 
 /* ============ LOCATIONS ============ */
-.branch-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-bottom:40px;}
+.branch-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:24px;margin-bottom:40px;}
 .branch-card{border:1px solid var(--line);border-radius:8px;padding:24px;background:var(--bg-soft);}
 .branch-card .eyebrow{margin-bottom:10px;}
 .branch-card h3{font-size:17px;text-transform:none;letter-spacing:0;font-weight:600;margin-bottom:10px;}
 .branch-card address{font-style:normal;font-size:14px;color:var(--ink-soft);margin-bottom:14px;line-height:1.6;}
+.branch-card-links{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:14px;}
 .branch-card a.tel{font-family:var(--mono);font-size:13.5px;color:var(--red);font-weight:600;}
+.branch-card a.directions{
+  font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--ink-soft);
+  border-bottom:1px solid var(--line);padding-bottom:1px;transition:color .15s, border-color .15s;
+}
+.branch-card a.directions:hover{color:var(--red);border-color:var(--red);}
+.branch-map{border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:4px;}
+.branch-map iframe{width:100%;height:160px;border:0;display:block;}
 .map-embed{border:1px solid var(--line);border-radius:8px;overflow:hidden;}
 .map-embed iframe{width:100%;height:340px;border:0;display:block;}
 @media (max-width:760px){ .branch-grid{grid-template-columns:1fr;} }
