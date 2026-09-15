@@ -257,7 +257,7 @@ details[open] .zone-more svg{transform:rotate(180deg);}
 /* ============ TRUST PARTNERS ============ */
 .partners-viewport{overflow:hidden;}
 .partners-track{display:flex;align-items:center;gap:56px;flex-wrap:nowrap;width:max-content;margin:0 auto;}
-.partners-track img{height:100px;width:auto;object-fit:contain;opacity:.7;filter:grayscale(1);flex-shrink:0;transition:opacity .15s;}
+.partners-track img{height:500px;width:auto;object-fit:contain;opacity:.7;filter:grayscale(1);flex-shrink:0;transition:opacity .15s;}
 .partners-track img:hover{opacity:1;}
 @keyframes partners-scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 .partners-track.is-scrolling{animation:partners-scroll 26s linear infinite;}
